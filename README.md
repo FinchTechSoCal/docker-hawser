@@ -31,7 +31,7 @@ nano ~/appdata/docker_files/hawser/.env
 
 **Generate Keypair**
 ```bash
-openssl req -x509 -newkey rsa:2048 -keyout ~/appdata/hawser/server.key -out ~/appdata/hawser/server.crt -sha256 -days 365 -subj "/C=US"
+openssl req -x509 -newkey rsa:2048 -keyout ~/appdata/hawser/server.key -out ~/appdata/hawser/server.crt -sha256 -days 365 -subj "/C=US" -nodes
 ```
 
 
@@ -42,7 +42,7 @@ openssl req -x509 -newkey rsa:2048 -keyout ~/appdata/hawser/server.key -out ~/ap
 <summary>Full cert subject</summary>
 
 ```bash
-openssl req -x509 -newkey rsa:2048 -keyout server.key -out server.crt -sha256 -days 365 -subj "/C=US/ST=State/L=City/O=Organization/CN=yourdomain.com"
+openssl req -x509 -newkey rsa:2048 -keyout server.key -out server.crt -sha256 -days 365 -subj "/C=US/ST=State/L=City/O=Organization/CN=yourdomain.com" -nodes
 ```
 
 </details>
