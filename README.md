@@ -33,7 +33,7 @@ nano ~/appdata/docker_files/hawser/.env
 
 ```bash
 # enter a name for the keypair (hostname)
-KEYPATH=~/appdata/docker_files/hawser
+KEYPATH=~/appdata/hawser
 KEYNAME=mykey
 # generate a private key
 #openssl ecparam -name prime256v1 -genkey -noout -out $KEYPATH/$KEYNAME.key
