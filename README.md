@@ -17,15 +17,28 @@ Remote Docker agent for [Dockhand](https://dockhand.pro) - manage Docker hosts a
 
 We use "Standard Mode with TLS and Token (recommended for production)"
 
+**Pull**
+
+```bash
+rm -fr ~/appdata/docker_files/hawser
+git clone https://github.com/FinchTechSoCal/docker-hawser.git ~/appdata/docker_files/hawser
+```
+
+**Modify .env**
+```bash
+nano ~/appdata/docker_files/hawser/.env
+```
+
 **Generate Keypair**
 
 ```bash
 # enter a name for the keypair (hostname)
+KEYPATH=~/appdata/docker_files/hawser
 KEYNAME=mykey
 # generate a private key
-openssl ecparam -name prime256v1 -genkey -noout -out $KEYNAME.key
+openssl ecparam -name prime256v1 -genkey -noout -out $KEYPATH/$KEYNAME.key
 # extract the public key
-openssl ec -in $KEYNAME.key -pubout -out $KEYNAME.crt
+openssl ec -in $KEYPATH/$KEYNAME.key -pubout -out $KEYPATH/$KEYNAME.crt
 ```
 
 **Run Hawser**
