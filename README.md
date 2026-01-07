@@ -21,11 +21,11 @@ We use "Standard Mode with TLS and Token (recommended for production)"
 
 ```bash
 # enter a name for the keypair (hostname)
-$KEYNAME="MYKEY"
+KEYNAME=MYKEY
 # generate a private key
-openssl ecparam -name prime256v1 -genkey -noout -out ec-p256-private.pem
+openssl ecparam -name prime256v1 -genkey -noout -out $KEYNAME.key
 # extract the public key
-openssl ec -in ec-p256-private.pem -pubout -out ec-p256-public.pem
+openssl ec -in $KEYNAME.key -pubout -out $KEYNAME.crt
 ```
 
 **Run Hawser**
