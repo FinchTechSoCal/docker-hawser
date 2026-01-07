@@ -31,7 +31,7 @@ nano ~/appdata/docker_files/hawser/.env
 
 **Generate Keypair**
 ```bash
-openssl req -x509 -newkey rsa:2048 -keyout ~/appdata/hawser/server.key -out ~/appdata/hawser/server.crt -sha256 -days 365 -subj "/C=US" -nodes
+openssl req -x509 -newkey rsa:2048 -keyout ~/appdata/hawser/server.key -out ~/appdata/hawser/server.crt -sha256 -days 3650 -subj "/C=US" -nodes
 ```
 
 
@@ -45,41 +45,6 @@ openssl req -x509 -newkey rsa:2048 -keyout ~/appdata/hawser/server.key -out ~/ap
 openssl req -x509 -newkey rsa:2048 -keyout server.key -out server.crt -sha256 -days 365 -subj "/C=US/ST=State/L=City/O=Organization/CN=yourdomain.com" -nodes
 ```
 
-</details>
+https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/configuring-https-ssl.html
 
-
-
-<details>
-
-<summary>Old keygen attempt</summary>
-
-```bash
-# enter a name for the keypair (hostname)
-KEYPATH=~/appdata/hawser
-KEYNAME=mykey
-# generate a private key
-#openssl ecparam -name prime256v1 -genkey -noout -out $KEYPATH/$KEYNAME.key
-openssl genrsa -out $KEYPATH/$KEYNAME.key 2048
-# extract the public key
-#openssl ec -in $KEYPATH/$KEYNAME.key -pubout -out $KEYPATH/$KEYNAME.crt
-openssl rsa -in $KEYPATH/$KEYNAME.key -outform PEM -pubout -out $KEYPATH/$KEYNAME.pem
-```
-</details>
-<details>
-
-<summary>Direct docker command</summary>
-
-**Run Hawser**
-
-```bash
-docker run -d \
-  --name hawser \
-  -v /var/run/docker.sock:/var/run/docker.sock \
-  -v /path/to/certs:/certs:ro \
-  -p 2376:2376 \
-  -e TLS_CERT=/certs/server.crt \
-  -e TLS_KEY=/certs/server.key \
-  -e TOKEN=your-secret-token \
-  ghcr.io/finsys/hawser:latest
-```
 </details>

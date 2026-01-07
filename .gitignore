@@ -28,3 +28,4 @@ coverage.html
 # Certs
 *.crt
 *.key
+*.pem
