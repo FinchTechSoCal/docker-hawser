@@ -21,7 +21,7 @@ We use "Standard Mode with TLS and Token (recommended for production)"
 
 ```bash
 # enter a name for the keypair (hostname)
-KEYNAME=MYKEY
+KEYNAME=mykey
 # generate a private key
 openssl ecparam -name prime256v1 -genkey -noout -out $KEYNAME.key
 # extract the public key
