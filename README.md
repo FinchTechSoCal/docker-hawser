@@ -36,9 +36,11 @@ nano ~/appdata/docker_files/hawser/.env
 KEYPATH=~/appdata/docker_files/hawser
 KEYNAME=mykey
 # generate a private key
-openssl ecparam -name prime256v1 -genkey -noout -out $KEYPATH/$KEYNAME.key
+#openssl ecparam -name prime256v1 -genkey -noout -out $KEYPATH/$KEYNAME.key
+openssl genrsa -out $KEYPATH/$KEYNAME.key 2048
 # extract the public key
-openssl ec -in $KEYPATH/$KEYNAME.key -pubout -out $KEYPATH/$KEYNAME.crt
+#openssl ec -in $KEYPATH/$KEYNAME.key -pubout -out $KEYPATH/$KEYNAME.crt
+openssl rsa -in $KEYPATH/$KEYNAME.key -outform PEM -pubout -out $KEYPATH/$KEYNAME.pem
 ```
 
 **Run Hawser**
