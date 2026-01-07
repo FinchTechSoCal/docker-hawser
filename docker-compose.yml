@@ -12,6 +12,7 @@ services:
       - TLS_KEY=/certs/${HAS_TLS_KEY} # .key file
       - TOKEN=${HAS_TOKEN}
       - LOG_LEVEL=${HAS_LOGLEVEL} # optional
+      - TLS_SKIP_VERIFY=${HAS_TLS_SKIP_VERIFY} # false/true
     volumes:
       - ${LOCVOL1}hawser:/certs
       - /var/run/docker.sock:/var/run/docker.sock
