@@ -1,0 +1,26 @@
+#
+# https://github.com/Finsys/hawser/tree/main?tab=readme-ov-file#docker
+# https://dockhand.pro/manual/
+#
+services:
+#
+  hawser:
+    image: ghcr.io/finsys/hawser:latest
+    container_name: hawser
+    environment:
+      - TLS_CERT=/certs/${HAS_TLS_CERT} # .crt file
+      - TLS_KEY=/certs/${HAS_TLS_KEY} # .key file
+      - TOKEN=${HAS_TOKEN}
+      - LOG_LEVEL=${HAS_LOGLEVEL} # optional
+    volumes:
+      - ${LOCVOL1}hawser:/certs
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 2376:2376
+    restart: always
+#
+#
+networks:
+  default:
+    name: ${CONNET}
+    external: true

@@ -1,2 +1,43 @@
-# docker-hawser
-Remote Docker agent for Dockhand - manage Docker hosts anywhere.
+# Hawser
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Finsys/hawser/main/logo/hawser.png" alt="Hawser Logo" width="200">
+</p>
+
+[![GitHub Release](https://img.shields.io/github/v/release/Finsys/hawser?style=flat-square&logo=github)](https://github.com/Finsys/hawser/releases/latest)
+[![Build](https://img.shields.io/github/actions/workflow/status/Finsys/hawser/build.yml?branch=main&style=flat-square&logo=github&label=build)](https://github.com/Finsys/hawser/actions/workflows/build.yml)
+[![Release](https://img.shields.io/github/actions/workflow/status/Finsys/hawser/release.yml?style=flat-square&logo=github&label=release)](https://github.com/Finsys/hawser/actions/workflows/release.yml)
+[![Go Version](https://img.shields.io/github/go-mod/go-version/Finsys/hawser?style=flat-square&logo=go)](https://go.dev/)
+[![Docker Image](https://img.shields.io/badge/docker-ghcr.io%2Ffinsys%2Fhawser-blue?style=flat-square&logo=docker)](https://github.com/Finsys/hawser/pkgs/container/hawser)
+[![License](https://img.shields.io/github/license/Finsys/hawser?style=flat-square)](LICENSE)
+
+Remote Docker agent for [Dockhand](https://dockhand.pro) - manage Docker hosts anywhere.
+
+## Use
+
+We use "Standard Mode with TLS and Token (recommended for production)"
+
+**Generate Keypair**
+
+```bash
+# enter a name for the keypair (hostname)
+$KEYNAME="MYKEY"
+# generate a private key
+openssl ecparam -name prime256v1 -genkey -noout -out ec-p256-private.pem
+# extract the public key
+openssl ec -in ec-p256-private.pem -pubout -out ec-p256-public.pem
+```
+
+**Run Hawser**
+
+```bash
+docker run -d \
+  --name hawser \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -v /path/to/certs:/certs:ro \
+  -p 2376:2376 \
+  -e TLS_CERT=/certs/server.crt \
+  -e TLS_KEY=/certs/server.key \
+  -e TOKEN=your-secret-token \
+  ghcr.io/finsys/hawser:latest
+```
