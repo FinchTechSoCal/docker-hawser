@@ -23,7 +23,7 @@ services:
     ports:
       - 2376:2376
     healthcheck: # https://github.com/Finsys/hawser?tab=readme-ov-file#docker-health-check
-        test: wget -q --spider https://localhost:2376/_hawser/health || exit 1
+        test: wget -q --spider --no-check-certificate https://localhost:2376/_hawser/health || exit 1
         interval: 30s
         timeout: 5s
         retries: "3"
