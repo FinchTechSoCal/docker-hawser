@@ -31,7 +31,7 @@ nano ~/appdata/docker_files/hawser/.env
 
 **Generate Keypair**
 ```bash
-openssl req -x509 -newkey rsa:2048 -keyout ~/appdata/hawser/server.key -out ~/appdata/hawser/server.crt -sha256 -days 3650 -subj "/C=US" -nodes
+openssl req -x509 -newkey rsa:2048 -keyout ~/appdata/hawser/server.key -out ~/appdata/hawser/server.crt -sha256 -days 3650 -subj "/C=US/ST=California/CN=alfinternet.io" -nodes
 ```
 
 
