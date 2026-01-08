@@ -16,6 +16,7 @@ services:
       - TOKEN=${HAS_TOKEN}
       - LOG_LEVEL=${HAS_LOGLEVEL} # optional
       - TLS_SKIP_VERIFY=${HAS_TLS_SKIP_VERIFY} # false/true
+      - DOCKHAND_SERVER_URL=${HAS_DOCKSVR_URL} # leave blank for standard, populate for edge mode
     volumes:
       - ${LOCVOL1}hawser:/certs
       - /var/run/docker.sock:/var/run/docker.sock
