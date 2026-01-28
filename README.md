@@ -27,7 +27,12 @@ sed -i 's;YourOwnSuperSecretToken;'$(openssl rand -base64 32)';g' ~/appdata/dock
 openssl req -x509 -newkey rsa:2048 -keyout ~/appdata/hawser/server.key -out ~/appdata/hawser/server.crt -sha256 -days 3650 -subj "/C=US/ST=California/CN=alfinternet.io" -nodes
 ```
 
+**Run**
+```bash
+docker compose -f ~/appdata/docker_files/hawser/docker-compose.yml up -d
+```
 
+---
 
 <details>
 
