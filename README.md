@@ -20,6 +20,7 @@ We use "Standard Mode with TLS and Token (recommended for production)"
 **Use**
 ```bash
 rm -fr ~/appdata/docker_files/hawser
+mkdir -p ~/appdata/hawser/
 git clone https://github.com/FinchTechSoCal/docker-hawser.git ~/appdata/docker_files/hawser
 sed -i 's;/path/to/appdata/;'$HOME'/appdata/;g' ~/appdata/docker_files/dockhand/.env
 sed -i 's;YourOwnSuperSecretToken;'$(openssl rand -base64 32)';g' ~/appdata/docker_files/dockhand/.env
