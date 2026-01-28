@@ -17,12 +17,20 @@ Remote Docker agent for [Dockhand](https://dockhand.pro) - manage Docker hosts a
 
 We use "Standard Mode with TLS and Token (recommended for production)"
 
-**Pull**
-
+**Use**
 ```bash
 rm -fr ~/appdata/docker_files/hawser
 git clone https://github.com/FinchTechSoCal/docker-hawser.git ~/appdata/docker_files/hawser
+sed -i 's;/path/to/appdata/;'$HOME'/appdata/;g' ~/appdata/docker_files/dockhand/.env
+sed -i 's;YourOwnSuperSecretToken;'$(openssl rand -base64 32)';g' ~/appdata/docker_files/dockhand/.env
+openssl req -x509 -newkey rsa:2048 -keyout ~/appdata/hawser/server.key -out ~/appdata/hawser/server.crt -sha256 -days 3650 -subj "/C=US/ST=California/CN=alfinternet.io" -nodes
 ```
+
+
+
+<details>
+
+<summary>Full use</summary>
 
 **Modify .env**
 ```bash
@@ -33,13 +41,6 @@ nano ~/appdata/docker_files/hawser/.env
 ```bash
 openssl req -x509 -newkey rsa:2048 -keyout ~/appdata/hawser/server.key -out ~/appdata/hawser/server.crt -sha256 -days 3650 -subj "/C=US/ST=California/CN=alfinternet.io" -nodes
 ```
-
-
-
-
-<details>
-
-<summary>Full cert subject</summary>
 
 ```bash
 openssl req -x509 -newkey rsa:2048 -keyout server.key -out server.crt -sha256 -days 365 -subj "/C=US/ST=State/L=City/O=Organization/CN=yourdomain.com" -nodes
