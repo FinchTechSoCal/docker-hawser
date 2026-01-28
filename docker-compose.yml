@@ -4,13 +4,15 @@
 #
 #
 name: hawser
-#
+
 services:
-#
   hawser:
     container_name: hawser
     image: ghcr.io/finsys/hawser:latest
     environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
       - TLS_CERT=/certs/${HAS_TLS_CERT} # .crt file
       - TLS_KEY=/certs/${HAS_TLS_KEY} # .key file
       - TOKEN=${HAS_TOKEN}
@@ -19,18 +21,20 @@ services:
       - DOCKHAND_SERVER_URL=${HAS_DOCKSVR_URL} # leave blank for standard, populate for edge mode
     volumes:
       - ${LOCVOL1}hawser:/certs
+      - ${HAWSER_STACKS}:/data/stacks
       - /var/run/docker.sock:/var/run/docker.sock
     ports:
       - 2376:2376
-    healthcheck: # https://github.com/Finsys/hawser?tab=readme-ov-file#docker-health-check
-        test: wget -q --spider --no-check-certificate https://localhost:2376/_hawser/health || exit 1
-        interval: 30s
-        timeout: 5s
-        retries: "3"
-        start_period: 10s
+    # healthcheck was fixed in 0.2.24
+    #healthcheck: # https://github.com/Finsys/hawser?tab=readme-ov-file#docker-health-check
+        #test: wget -q --spider --no-check-certificate https://localhost:2376/_hawser/health || exit 1
+        #interval: 30s
+        #timeout: 5s
+        #retries: "3"
+        #start_period: 10s
     restart: always
-#
-#
+
+
 networks:
   default:
     name: ${CONNET}
