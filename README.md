@@ -22,8 +22,8 @@ We use "Standard Mode with TLS and Token (recommended for production)"
 rm -fr ~/appdata/docker_files/hawser
 mkdir -p ~/appdata/hawser/
 git clone https://github.com/FinchTechSoCal/docker-hawser.git ~/appdata/docker_files/hawser
-sed -i 's;/path/to/appdata/;'$HOME'/appdata/;g' ~/appdata/docker_files/dockhand/.env
-sed -i 's;YourOwnSuperSecretToken;'$(openssl rand -base64 32)';g' ~/appdata/docker_files/dockhand/.env
+sed -i 's;/path/to/appdata/;'$HOME'/appdata/;g' ~/appdata/docker_files/hawser/.env
+sed -i 's;YourOwnSuperSecretToken;'$(openssl rand -base64 32)';g' ~/appdata/docker_files/hawser/.env
 openssl req -x509 -newkey rsa:2048 -keyout ~/appdata/hawser/server.key -out ~/appdata/hawser/server.crt -sha256 -days 3650 -subj "/C=US/ST=California/CN=alfinternet.io" -nodes
 ```
 
