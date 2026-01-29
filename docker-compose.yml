@@ -19,6 +19,7 @@ services:
       - TLS_SKIP_VERIFY=${TLS_SKIP_VERIFY} # false/true
       - DOCKHAND_SERVER_URL=${DOCKHAND_SERVER_URL} # leave blank for standard, populate for edge mode
       - AGENT_NAME=${AGENT_NAME}
+      - CA_CERT=/certs/${HAS_CA_CERT}
     volumes:
       - ${LOCVOL1}hawser:/certs
       - ${HAWSER_STACKS}:/data/stacks
