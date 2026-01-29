@@ -53,5 +53,7 @@ openssl req -x509 -newkey rsa:2048 -keyout server.key -out server.crt -sha256 -d
 ```
 
 https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/configuring-https-ssl.html
+https://arminreiter.com/2022/01/create-your-own-certificate-authority-ca-using-openssl/
+https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/securing_networks/creating-and-managing-tls-keys-and-certificates_securing-networks#creating-a-private-ca-using-openssl_creating-and-managing-tls-keys-and-certificates
 
 </details>
