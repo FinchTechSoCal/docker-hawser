@@ -19,17 +19,17 @@ We use "Standard Mode with TLS and Token (recommended for production)"
 
 **Use**
 ```bash
-rm -fr ~/appdata/docker_files/hawser
+rm -fr ~/appdata/stacks/hawser
 mkdir -p ~/appdata/hawser/
-git clone https://github.com/FinchTechSoCal/docker-hawser.git ~/appdata/docker_files/hawser
-sed -i 's;/path/to/appdata/;'$HOME'/appdata/;g' ~/appdata/docker_files/hawser/.env
-sed -i 's;YourOwnSuperSecretToken;'$(openssl rand -base64 32)';g' ~/appdata/docker_files/hawser/.env
+git clone https://github.com/FinchTechSoCal/docker-hawser.git ~/appdata/stacks/hawser
+sed -i 's;/path/to/appdata/;'$HOME'/appdata/;g' ~/appdata/stacks/hawser/.env
+sed -i 's;YourOwnSuperSecretToken;'$(openssl rand -base64 32)';g' ~/appdata/stacks/hawser/.env
 openssl req -x509 -newkey rsa:2048 -keyout ~/appdata/hawser/server.key -out ~/appdata/hawser/server.crt -sha256 -days 3650 -subj "/C=US/ST=California/CN=alfinternet.io" -nodes
 ```
 
 **Run**
 ```bash
-docker compose -f ~/appdata/docker_files/hawser/docker-compose.yml up -d
+docker compose -f ~/appdata/stacks/hawser/docker-compose.yml up -d
 ```
 
 ---
@@ -40,7 +40,7 @@ docker compose -f ~/appdata/docker_files/hawser/docker-compose.yml up -d
 
 **Modify .env**
 ```bash
-nano ~/appdata/docker_files/hawser/.env
+nano ~/appdata/stacks/hawser/.env
 ```
 
 **Generate Keypair**
