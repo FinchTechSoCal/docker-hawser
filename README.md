@@ -24,7 +24,7 @@ mkdir -p ~/appdata/hawser/
 git clone https://github.com/FinchTechSoCal/docker-hawser.git ~/appdata/stacks/hawser
 sed -i 's;/path/to/appdata/;'$HOME'/appdata/;g' ~/appdata/stacks/hawser/.env
 sed -i 's;YourOwnSuperSecretToken;'$(openssl rand -base64 32)';g' ~/appdata/stacks/hawser/.env
-openssl req -x509 -newkey rsa:2048 -keyout ~/appdata/hawser/server.key -out ~/appdata/hawser/server.crt -sha256 -days 3650 -subj "/C=US/ST=California/CN=alfinternet.io" -nodes
+openssl req -x509 -newkey rsa:2048 -keyout ~/appdata/hawser/server.key -out ~/appdata/hawser/server.crt -sha256 -days 3650 -subj "/C=US/ST=California/CN=hawser.io" -nodes
 ```
 
 **Run**
@@ -45,7 +45,7 @@ nano ~/appdata/stacks/hawser/.env
 
 **Generate Keypair**
 ```bash
-openssl req -x509 -newkey rsa:2048 -keyout ~/appdata/hawser/server.key -out ~/appdata/hawser/server.crt -sha256 -days 3650 -subj "/C=US/ST=California/CN=alfinternet.io" -nodes
+openssl req -x509 -newkey rsa:2048 -keyout ~/appdata/hawser/server.key -out ~/appdata/hawser/server.crt -sha256 -days 3650 -subj "/C=US/ST=California/CN=hawser.io" -nodes
 ```
 
 ```bash
