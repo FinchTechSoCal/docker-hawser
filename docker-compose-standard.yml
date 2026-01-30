@@ -18,8 +18,9 @@ services:
       - TOKEN=${TOKEN}
       - LOG_LEVEL=${LOG_LEVEL} # optional
       - TLS_SKIP_VERIFY=${TLS_SKIP_VERIFY} # false/true
+      - AGENT_NAME=${AGENT_NAME} # recommend host/client name
       #- DOCKHAND_SERVER_URL=${DOCKHAND_SERVER_URL} # leave blank for standard, populate for edge mode
-      #- AGENT_NAME=${AGENT_NAME} # used for edge mode, recommend host/client name
+      
     volumes:
       - ${LOCVOL1}hawser:/certs
       - ${HAWSER_STACKS}:/data/stacks
