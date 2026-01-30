@@ -2,37 +2,24 @@
 # https://github.com/Finsys/hawser/tree/main?tab=readme-ov-file#docker
 # https://dockhand.pro/manual/
 #
-#
-# name: hawser
+# I like to run hawser in edge mode, see docker-compose-standard.yml for standard mode
+
 services:
   hawser:
     container_name: hawser
     image: ghcr.io/finsys/hawser:latest
     environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TZ}
-      - TLS_CERT=/certs/${HAS_TLS_CERT} # .crt file
-      - TLS_KEY=/certs/${HAS_TLS_KEY} # .key file
       - TOKEN=${TOKEN}
-      - LOG_LEVEL=${LOG_LEVEL} # optional
-      - TLS_SKIP_VERIFY=${TLS_SKIP_VERIFY} # false/true
-      - DOCKHAND_SERVER_URL=${DOCKHAND_SERVER_URL} # leave blank for standard, populate for edge mode
-      - AGENT_NAME=${AGENT_NAME}
-      - CA_CERT=/certs/${HAS_CA_CERT}
+      - DOCKHAND_SERVER_URL=${DOCKHAND_SERVER_URL} # populate for edge mode
+      - LOG_LEVEL=${LOG_LEVEL} # optional, default info - values: debug, info, warn, error
+      - AGENT_NAME=${AGENT_NAME} # recommend host/client name
+      - TLS_SKIP_VERIFY=${TLS_SKIP_VERIFY} # false/true, for testing
+      - HEARTBEAT_INTERVAL=${HEARTBEAT_INTERVAL} # optional, default 30
+      - CA_CERT=${CA_CERT} # .crt/.pem file if there's a self signed cert in front of dockhand
     volumes:
       - ${LOCVOL1}hawser:/certs
       - ${HAWSER_STACKS}:/data/stacks
       - /var/run/docker.sock:/var/run/docker.sock
-    ports:
-      - 2376:2376
-    # healthcheck was fixed in 0.2.24
-    #healthcheck: # https://github.com/Finsys/hawser?tab=readme-ov-file#docker-health-check
-        #test: wget -q --spider --no-check-certificate https://localhost:2376/_hawser/health || exit 1
-        #interval: 30s
-        #timeout: 5s
-        #retries: "3"
-        #start_period: 10s
     restart: always
 
 
