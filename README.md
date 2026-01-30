@@ -15,9 +15,19 @@ Remote Docker agent for [Dockhand](https://dockhand.pro) - manage Docker hosts a
 
 ## Use
 
-We use "Standard Mode with TLS and Token (recommended for production)"
+Prefer Edge Mode for our needs but "Standard Mode with TLS and Token" is an option
 
 **Use**
+
+Get token & connection string from dockhand and set variables:
+
+```bash
+DOCKHAND_SERVER_URL=Your_Dockhand_WSS_URL
+TOKEN=Your_Generated_Token
+```
+
+**Pull & Update .env**
+
 ```bash
 rm -fr ~/appdata/stacks/hawser
 mkdir -p ~/appdata/hawser/
@@ -25,12 +35,15 @@ git clone https://github.com/FinchTechSoCal/docker-hawser.git ~/appdata/stacks/h
 sed -i 's;/path/to/appdata/;'$HOME'/appdata/;g' ~/appdata/stacks/hawser/.env
 sed -i 's;YourOwnSuperSecretToken;'$(openssl rand -base64 32)';g' ~/appdata/stacks/hawser/.env
 openssl req -x509 -newkey rsa:2048 -keyout ~/appdata/hawser/server.key -out ~/appdata/hawser/server.crt -sha256 -days 3650 -subj "/C=US/ST=California/CN=hawser.io" -nodes
+sed -i 's;DOCKHAND_SERVER_URL=;DOCKHAND_SERVER_URL='$DOCKHAND_SERVER_URL';g' ~/appdata/stacks/hawser/.env
+sed -i 's;TOKEN=;TOKEN='$TOKEN';g' ~/appdata/stacks/hawser/.env
 ```
 
 **Run**
 ```bash
 docker compose -f ~/appdata/stacks/hawser/docker-compose.yml up -d
 ```
+
 
 ---
 
