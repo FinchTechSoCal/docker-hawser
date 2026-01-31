@@ -27,7 +27,8 @@ sed -i 's;AGENT_NAME=;AGENT_NAME='$(cat /etc/hostname)';g' ~/appdata/stacks/haws
 ```
 
 **Select either option**
-Edge mode:
+
+*Edge mode*:
 
 ```bash
 DOCKHAND_SERVER_URL=Your_Dockhand_WSS_URL
@@ -39,7 +40,7 @@ sed -i 's;DOCKHAND_SERVER_URL=;DOCKHAND_SERVER_URL='$DOCKHAND_SERVER_URL';g' ~/a
 sed -i 's;YourOwnSuperSecretToken;'$TOKEN';g' ~/appdata/stacks/hawser/.env
 ```
 
-Standalone mode:
+*Standalone mode*:
 ```bash
 TOKEN=$(openssl rand -base64 32)
 openssl ecparam -name prime256v1 -genkey -noout -out ~/appdata/stacks/hawser/server.key
