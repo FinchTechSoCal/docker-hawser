@@ -40,7 +40,8 @@ sed -i 's;/path/to/appdata/;'$HOME'/appdata/;g' ~/appdata/stacks/hawser/.env
 sed -i 's;DOCKHAND_SERVER_URL=;DOCKHAND_SERVER_URL='$DOCKHAND_SERVER_URL';g' ~/appdata/stacks/hawser/.env
 sed -i 's;YourOwnSuperSecretToken;'$TOKEN';g' ~/appdata/stacks/hawser/.env
 sed -i 's;AGENT_NAME=;AGENT_NAME='$(cat /etc/hostname)';g' ~/appdata/stacks/hawser/.env
-openssl ecparam -name prime256v1 -genkey -noout -out ~/appdata/hawser/server.key | openssl req -new -x509 -days 3652 -key ~/appdata/hawser/server.key -sha256 -out ~/appdata/hawser/server.crt
+openssl ecparam -name prime256v1 -genkey -noout -out ~/appdata/stacks/hawser/server.key
+openssl req -new -x509 -days 3652 -key ~/appdata/stacks/hawser/server.key -sha256 -out ~/appdata/stacks/hawser/server.crt -subj "/C=US/ST=California/CN=hawser"
 ```
 
 **Self-signed RSA cert**
