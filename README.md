@@ -17,7 +17,45 @@ Remote Docker agent for [Dockhand](https://dockhand.pro) - manage Docker hosts a
 
 Prefer Edge Mode for our needs but "Standard Mode with TLS and Token" is an option
 
-**Use**
+**Clone git to system**
+```bash
+rm -fr ~/appdata/stacks/hawser
+mkdir -p ~/appdata/hawser/
+git clone https://github.com/FinchTechSoCal/docker-hawser.git ~/appdata/stacks/hawser
+sed -i 's;/path/to/appdata/;'$HOME'/appdata/;g' ~/appdata/stacks/hawser/.env
+sed -i 's;AGENT_NAME=;AGENT_NAME='$(cat /etc/hostname)';g' ~/appdata/stacks/hawser/.env
+```
+
+**Select either option**
+Edge mode:
+
+```bash
+DOCKHAND_SERVER_URL=Your_Dockhand_WSS_URL
+TOKEN=Your_Generated_Token
+```
+Then
+```bash
+sed -i 's;DOCKHAND_SERVER_URL=;DOCKHAND_SERVER_URL='$DOCKHAND_SERVER_URL';g' ~/appdata/stacks/hawser/.env
+sed -i 's;YourOwnSuperSecretToken;'$TOKEN';g' ~/appdata/stacks/hawser/.env
+```
+
+Standalone mode:
+```bash
+TOKEN=$(openssl rand -base64 32)
+openssl ecparam -name prime256v1 -genkey -noout -out ~/appdata/stacks/hawser/server.key
+openssl req -new -x509 -days 3652 -key ~/appdata/stacks/hawser/server.key -sha256 -out ~/appdata/stacks/hawser/server.crt -subj "/C=US/ST=California/CN=hawser"
+sed -i 's;YourOwnSuperSecretToken;'$TOKEN';g' ~/appdata/stacks/hawser/.env
+sed -i 's;TLS_CERT=;TLS_CERT=/cert/server.crt;g' ~/appdata/stacks/hawser/.env
+sed -i 's;TLS_KEY=;TLS_KEY=/cert/server.key;g' ~/appdata/stacks/hawser/.env
+```
+
+---
+
+<details>
+
+<summary>Full use</summary>
+
+## Old way
 
 Get token & connection string from dockhand and set variables:
 ```bash
@@ -55,11 +93,7 @@ docker compose -f ~/appdata/stacks/hawser/docker-compose.yml up -d
 ```
 
 
----
 
-<details>
-
-<summary>Full use</summary>
 
 **Modify .env**
 ```bash
