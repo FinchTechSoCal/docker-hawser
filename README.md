@@ -29,6 +29,7 @@ sed -i 's;AGENT_NAME=;AGENT_NAME='$(cat /etc/hostname)';g' ~/appdata/stacks/haws
 **Select either option**
 
 *Edge mode*:
+These are generated from dockhand
 
 ```bash
 DOCKHAND_SERVER_URL=Your_Dockhand_WSS_URL
