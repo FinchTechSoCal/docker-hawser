@@ -19,6 +19,7 @@ services:
     volumes:
       - ${LOCVOL1}hawser:/certs
       - ${HAWSER_STACKS}:/data/stacks
+      - ${HAWSER_STACKS}:${HAWSER_STACKS}
       - /var/run/docker.sock:/var/run/docker.sock
     restart: always
 
