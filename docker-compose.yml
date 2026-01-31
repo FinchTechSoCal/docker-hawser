@@ -6,7 +6,7 @@
 services:
   hawser:
     container_name: hawser
-    image: ghcr.io/finsys/hawser:latest
+    image: ghcr.io/finsys/hawser:${IMAGE_TAG}
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
