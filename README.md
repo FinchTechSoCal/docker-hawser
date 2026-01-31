@@ -20,10 +20,14 @@ Prefer Edge Mode for our needs but "Standard Mode with TLS and Token" is an opti
 **Use**
 
 Get token & connection string from dockhand and set variables:
-
 ```bash
 DOCKHAND_SERVER_URL=Your_Dockhand_WSS_URL
 TOKEN=Your_Generated_Token
+```
+
+Or self generate the token (for Standard Mode)
+```bash
+TOKEN=$(openssl rand -base64 32)
 ```
 
 **Pull & Update .env**
@@ -33,7 +37,6 @@ rm -fr ~/appdata/stacks/hawser
 mkdir -p ~/appdata/hawser/
 git clone https://github.com/FinchTechSoCal/docker-hawser.git ~/appdata/stacks/hawser
 sed -i 's;/path/to/appdata/;'$HOME'/appdata/;g' ~/appdata/stacks/hawser/.env
-sed -i 's;YourOwnSuperSecretToken;'$(openssl rand -base64 32)';g' ~/appdata/stacks/hawser/.env
 openssl req -x509 -newkey rsa:2048 -keyout ~/appdata/hawser/server.key -out ~/appdata/hawser/server.crt -sha256 -days 3650 -subj "/C=US/ST=California/CN=hawser.io" -nodes
 sed -i 's;DOCKHAND_SERVER_URL=;DOCKHAND_SERVER_URL='$DOCKHAND_SERVER_URL';g' ~/appdata/stacks/hawser/.env
 sed -i 's;TOKEN=;TOKEN='$TOKEN';g' ~/appdata/stacks/hawser/.env
