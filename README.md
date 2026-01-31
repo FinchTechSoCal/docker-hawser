@@ -51,6 +51,11 @@ sed -i 's;TLS_CERT=;TLS_CERT=/cert/server.crt;g' ~/appdata/stacks/hawser/.env
 sed -i 's;TLS_KEY=;TLS_KEY=/cert/server.key;g' ~/appdata/stacks/hawser/.env
 ```
 
+**Run**
+```bash
+docker compose -f ~/appdata/stacks/hawser/docker-compose.yml up -d
+```
+
 ---
 
 <details>
