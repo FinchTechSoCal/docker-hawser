@@ -39,7 +39,7 @@ git clone https://github.com/FinchTechSoCal/docker-hawser.git ~/appdata/stacks/h
 sed -i 's;/path/to/appdata/;'$HOME'/appdata/;g' ~/appdata/stacks/hawser/.env
 openssl req -x509 -newkey rsa:2048 -keyout ~/appdata/hawser/server.key -out ~/appdata/hawser/server.crt -sha256 -days 3650 -subj "/C=US/ST=California/CN=hawser.io" -nodes
 sed -i 's;DOCKHAND_SERVER_URL=;DOCKHAND_SERVER_URL='$DOCKHAND_SERVER_URL';g' ~/appdata/stacks/hawser/.env
-sed -i 's;TOKEN=;TOKEN='$TOKEN';g' ~/appdata/stacks/hawser/.env
+sed -i 's;YourOwnSuperSecretToken;'$TOKEN';g' ~/appdata/stacks/hawser/.env
 ```
 
 **Run**
