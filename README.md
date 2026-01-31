@@ -39,9 +39,11 @@ git clone https://github.com/FinchTechSoCal/docker-hawser.git ~/appdata/stacks/h
 sed -i 's;/path/to/appdata/;'$HOME'/appdata/;g' ~/appdata/stacks/hawser/.env
 sed -i 's;DOCKHAND_SERVER_URL=;DOCKHAND_SERVER_URL='$DOCKHAND_SERVER_URL';g' ~/appdata/stacks/hawser/.env
 sed -i 's;YourOwnSuperSecretToken;'$TOKEN';g' ~/appdata/stacks/hawser/.env
+sed -i 's;AGENT_NAME=;AGENT_NAME='$(cat /etc/hostname)';g' ~/appdata/stacks/hawser/.env
+openssl ecparam -name prime256v1 -genkey -noout -out ~/appdata/hawser/server.key | openssl req -new -x509 -days 3652 -key ~/appdata/hawser/server.key -sha256 -out ~/appdata/hawser/server.crt
 ```
 
-**Self-signed cert**
+**Self-signed RSA cert**
 ```bash
 openssl req -x509 -newkey rsa:2048 -keyout ~/appdata/hawser/server.key -out ~/appdata/hawser/server.crt -sha256 -days 3650 -subj "/C=US/ST=California/CN=hawser.io" -nodes
 ```
@@ -63,7 +65,7 @@ docker compose -f ~/appdata/stacks/hawser/docker-compose.yml up -d
 nano ~/appdata/stacks/hawser/.env
 ```
 
-**Generate Keypair**
+**Generate RSA Keypair**
 ```bash
 openssl req -x509 -newkey rsa:2048 -keyout ~/appdata/hawser/server.key -out ~/appdata/hawser/server.crt -sha256 -days 3650 -subj "/C=US/ST=California/CN=hawser.io" -nodes
 ```
@@ -72,12 +74,17 @@ openssl req -x509 -newkey rsa:2048 -keyout ~/appdata/hawser/server.key -out ~/ap
 openssl req -x509 -newkey rsa:2048 -keyout server.key -out server.crt -sha256 -days 365 -subj "/C=US/ST=State/L=City/O=Organization/CN=yourdomain.com" -nodes
 ```
 
+**Generate ECDSA Keypair**
 
 https://www.google.com/search?q=ubuntu+self+signed+certificate+ECDSA&oq=ubuntu+self+signed+certificate+ECDSA
 
 ```bash
-openssl ecparam -name prime256v1 -genkey -noout -out ecdsa.key
-openssl req -new -x509 -days 3652 -key ecdsa.key -sha256 -out ecdsa.crt
+openssl ecparam -name prime256v1 -genkey -noout -out server.key
+openssl req -new -x509 -days 3652 -key server.key -sha256 -out server.crt
+```
+Or 1 line:
+```bash
+openssl ecparam -name prime256v1 -genkey -noout -out ~/appdata/hawser/server.key | openssl req -new -x509 -days 3652 -key ~/appdata/hawser/server.key -sha256 -out ~/appdata/hawser/server.crt
 
 ```
 
