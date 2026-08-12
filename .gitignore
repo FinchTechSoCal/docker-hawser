@@ -1,0 +1,29 @@
+# Binaries
+*.exe
+
+# Dependencies
+vendor/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test
+coverage.txt
+coverage.html
+*.test
+
+# Build
+*.out
+
+# Certs
+*.crt
+*.key
+*.pem
