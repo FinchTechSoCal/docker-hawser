@@ -22,7 +22,7 @@ services:
       - TLS_KEY=${TLS_KEY} # .key/.pem file
       - STACKS_DIR=${STACKS_DIR}
     volumes:
-      - ${APPDATA}hawser:/certs
+      - ${APPDATA}/hawser:/certs
       - ${STACKS_DIR}:${STACKS_DIR}
       - /var/run/docker.sock:/var/run/docker.sock
     #ports:
